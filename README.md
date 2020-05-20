@@ -2,11 +2,11 @@
 Implementation of Using Drug Description and Molecular Structures for Drug-Drug Interaction Extraction from Literature
 
 # Requirements
-python3
-torch >= 1.2
-transformers == 2.1
-rdkit
-lxml
+python3  
+torch >= 1.2  
+transformers == 2.1  
+rdkit  
+lxml  
 
 # Usage
 ## Preparation of the corpus sets
@@ -24,7 +24,7 @@ cd main
 python run_ddie.py \
     --task_name MRPC \
     --model_type bert \
-    --data_dir $TSV_DIR
+    --data_dir $NEW_TSV_DIR
     --model_name_or_path $SCIBERT_MODEL
     --per_gpu_train_batch_size 32 \
     --num_train_epochs 3. \
@@ -42,8 +42,8 @@ python run_ddie.py \
     --use_desc \
     --desc_conv_window_size 3 \
     --desc_conv_output_size 20 \
-    --molecular_vector_size 50 \
     --use_mol \
+    --molecular_vector_size 50 \
     --gnn_layer_hidden 5 \
     --gnn_layer_output 1 \
     --gnn_mode sum \
