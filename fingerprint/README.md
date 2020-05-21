@@ -1,4 +1,3 @@
-# Usage
 ## extract fingerprint from SMILES files and save to numpy files
 ```
 export $FINGERPRINT_DIR=(output npy files dir)

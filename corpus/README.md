@@ -1,4 +1,3 @@
-# Usage
 ## download corpus set
 Contact the task organizers and download data set
 

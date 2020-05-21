@@ -1,21 +1,21 @@
 # DESC\_MOL-DDIE
 Implementation of Using Drug Description and Molecular Structures for Drug-Drug Interaction Extraction from Literature
 
-# Requirements
+## Requirements
 python3  
 torch >= 1.2  
 transformers == 2.1  
 rdkit  
 lxml  
 
-# Usage
-## Preparation of the corpus sets
+## Usage
+### Preparation of the corpus sets
 see [corpus/README.md](corpus/README.md)
 
-## Preparation of the DrugBank data
+### Preparation of the DrugBank data
 see [database/README.md](database/README.md)
 
-## Preparation of the molecular fingerprints data
+### Preparation of the molecular fingerprints data
 see [fingerprint/README.md](fingerprint/README.md)
 
 ## DDI Extraction
@@ -51,3 +51,6 @@ python run_ddie.py \
     --fingerprint_dir $FINGERPRINT_DIR \
     --output_dir $OUTPUT_DIR
 ```
+
+## Acknowledgement
+This work was supported by JSPS KAKENHI Grant Numbers 17K12741 and 20k11962

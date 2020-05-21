@@ -1,4 +1,3 @@
-# Usage
 ## download DrugBank xml file
 download a drugbank xml file and set a path `export DRUGBANK_XML=(your drugbank file)`
 
