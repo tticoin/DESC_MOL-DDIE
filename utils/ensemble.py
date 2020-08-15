@@ -12,7 +12,7 @@ for path in glob.glob(os.path.join(outputs_dir, '*')):
     labels = np.load(os.path.join(path, 'labels.npy'))
     preds = np.load(os.path.join(path, 'preds.npy'))
     result = ddie_compute_metrics('ddie', np.argmax(preds, axis=1), labels, every_type=False)
-    preds = softmax(preds, axis=1)
+    #preds = softmax(preds, axis=1)
     print(result)
     if cnt == 0:
         ensembled_preds = preds
