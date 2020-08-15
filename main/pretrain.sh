@@ -1,0 +1,32 @@
+CUDA_VISIBLE_DEVICES=0 python run_pretraining.py \
+    --task_name MRPC \
+    --model_type bert \
+    --data_dir /mnt/database/fixed_excluded \
+    --model_name_or_path /mnt/model/scibert_scivocab_uncased \
+    --per_gpu_train_batch_size 32 \
+    --num_train_epochs 10. \
+    --learning_rate 5e-5 \
+    --dropout .1 \
+    --weight_decay .01 \
+    --evaluate_during_training \
+    --do_train \
+    --do_eval \
+    --do_lower_case \
+    --max_seq_length 128 \
+    --fp16 \
+    --middle_layer_size 0 \
+    --conv_window_size 5 \
+    --pos_emb_dim 10 \
+    --activation gelu \
+    --desc_conv_output_size 20 \
+    --desc_conv_window_size 3 \
+    --desc_layer_hidden 0 \
+    --use_desc \
+    --molecular_vector_size 50 \
+    --gnn_layer_hidden 6 \
+    --gnn_layer_output 0 \
+    --gnn_mode sum \
+    --gnn_activation gelu \
+    --fingerprint_dir /mnt/fingerprint/fixed_excluded_radius0 \
+    --overwrite_output_dir \
+    --output_dir /mnt/output/pretraining/fixed_excluded_desc \
