@@ -29,6 +29,7 @@ export $FINGERPRINT_DIR=sample/radius1
 export $RADIUS=1
 python3 fingerprint/preprocessor.py $NEW_TSV_DIR none $RADIUS $FINGERPRINT_DIR
 ```
+change these paths to absolute paths before running ```run_ddie.py```
 
 ## DDI Extraction
 ```
