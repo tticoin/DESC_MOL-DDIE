@@ -18,6 +18,18 @@ see [database/README.md](database/README.md)
 ### Preparation of the molecular fingerprints data
 see [fingerprint/README.md](fingerprint/README.md)
 
+### Preparation of the SciBERT model
+pre-trained SciBERT model is availabel [here](https://s3-us-west-2.amazonaws.com/ai2-s2-research/scibert/huggingface_pytorch/scibert_scivocab_uncased.tar)
+
+### Sample data set
+When you use the [sample data set](sample) created by splitting the official training data set, you can skip the preparation of the corpus and the database.
+```
+export $NEW_TSV_DIR=sample/tsv
+export $FINGERPRINT_DIR=sample/radius1
+export $RADIUS=1
+python3 fingerprint/preprocessor.py $NEW_TSV_DIR none $RADIUS $FINGERPRINT_DIR
+```
+
 ## DDI Extraction
 ```
 cd main
@@ -39,10 +51,8 @@ python run_ddie.py \
     --conv_window_size 5 \
     --pos_emb_dim 10 \
     --activation gelu \
-    --use_desc \
     --desc_conv_window_size 3 \
     --desc_conv_output_size 20 \
-    --use_mol \
     --molecular_vector_size 50 \
     --gnn_layer_hidden 5 \
     --gnn_layer_output 1 \
@@ -51,6 +61,8 @@ python run_ddie.py \
     --fingerprint_dir $FINGERPRINT_DIR \
     --output_dir $OUTPUT_DIR
 ```
+when you use description and molecular strucuture information, please add ```--use_desc``` and ```--use_mol``` arguments respectively.
+
 
 ## Acknowledgement
 This work was supported by JSPS KAKENHI Grant Numbers 17K12741 and 20k11962
