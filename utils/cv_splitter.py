@@ -1,7 +1,7 @@
 import sys
 import os
 import numpy as np
-from sklearn.model_selection import StratifiedKFold
+from sklearn.model_selection import StratifiedKFold, KFold, ShuffleSplit, StratifiedShuffleSplit
 import shutil
 
 
@@ -17,10 +17,18 @@ rad0 = np.load(os.path.join(rad0_dir, 'corpus_train.npy'), allow_pickle=True)
 #rad2 = np.load(os.path.join(rad2_dir, 'corpus_train.npy'), allow_pickle=True)
 
 k = int(k)
-skf = StratifiedKFold(n_splits=k)
+#skf = StratifiedKFold(n_splits=k)
+skf = StratifiedKFold(n_splits=k, shuffle=True)
+#kf = KFold(n_splits=k)
+kf = KFold(n_splits=k, shuffle=True)
+sp = ShuffleSplit(n_splits=k)
+ssp = StratifiedShuffleSplit(n_splits=k)
 
 cnt = 1
 for train_idx, test_idx in skf.split(lines, labels):
+#for train_idx, test_idx in kf.split(lines, labels):
+#for train_idx, test_idx in ssp.split(lines, labels):
+#for train_idx, test_idx in sp.split(lines, labels):
     rad0[train_idx]
     #print(labels[train_idx])
 

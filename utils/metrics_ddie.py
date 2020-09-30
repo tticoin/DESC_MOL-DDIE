@@ -67,10 +67,10 @@ if _has_sklearn:
         }
         if every_type:
             for i, label_type in enumerate(label_list):
-                p,r,f,s = precision_recall_fscore_support(y_pred=preds, y_true=labels, labels=[1,2,3,4], average='micro')
-                result[label_type + ' Precision'] = p
-                result[label_type + ' Recall'] = r
-                result[label_type + ' F'] = f
+                p,r,f,s = precision_recall_fscore_support(y_pred=preds, y_true=labels, labels=[i+1], average='micro')
+                result[label_type + '_Precision'] = p
+                result[label_type + '_Recall'] = r
+                result[label_type + '_F'] = f
         return result
 
     def pretraining_compute_metrics(task_name, preds, labels, every_type=False):

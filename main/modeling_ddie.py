@@ -216,8 +216,13 @@ class BertForSequenceClassification(BertPreTrainedModel):
                 pooled_output = torch.cat((pooled_output, pooled_desc1_output, pooled_desc2_output), 1)
 
         if self.use_mol:
-            fingerprint1 = fingerprint[:,0,]
-            fingerprint2 = fingerprint[:,1,]
+            if fingerprint.ndim == 3: # In case of mini-batchsize = 1
+                fingerprint1 = fingerprint[:,0,]
+                fingerprint2 = fingerprint[:,1,]
+            else:
+                fingerprint = np.expand_dims(fingerprint, 0)
+                fingerprint1 = fingerprint[:,0,]
+                fingerprint2 = fingerprint[:,1,]
             gnn_output1 = self.gnn.gnn(fingerprint1)
             gnn_output2 = self.gnn.gnn(fingerprint2)
             gnn_output = torch.cat((gnn_output1, gnn_output2), 1)

@@ -1,7 +1,7 @@
 ## download corpus set
 Contact the task organizers and download data set
 
-## conbert XML format to TSV format
+## convert XML format to TSV format
 ```
 export XML_DIR=(semeval2013 xml files dir)
 export BRAT_DIR=(brat format output files dir)

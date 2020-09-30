@@ -16,7 +16,6 @@ CUDA_VISIBLE_DEVICES=2 python run_ddie.py \
     --pos_emb_dim 10 \
     --activation gelu \
     --middle_layer_size 0 \
-    --use_desc \
     --desc_conv_window_size 3 \
     --desc_conv_output_size 20 \
     --molecular_vector_size 50 \
@@ -26,4 +25,4 @@ CUDA_VISIBLE_DEVICES=2 python run_ddie.py \
     --gnn_activation gelu \
     --fingerprint_dir /mnt/fingerprint/fixed_excluded_radius0 \
     --overwrite_output_dir \
-    --output_dir /mnt/DESC_MOL-DDIE/desc/
+    --output_dir /mnt/output/hoge
