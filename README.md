@@ -24,9 +24,9 @@ pre-trained SciBERT model is availabel [here](https://s3-us-west-2.amazonaws.com
 #### Sample data set
 When you use the [sample data set](sample) created by splitting the official training data set, you can skip the preparation of the corpus and the database.
 ```
-export $NEW_TSV_DIR=sample/tsv
-export $FINGERPRINT_DIR=sample/radius1
-export $RADIUS=1
+export NEW_TSV_DIR=sample/tsv
+export FINGERPRINT_DIR=sample/radius1
+export RADIUS=1
 python3 fingerprint/preprocessor.py $NEW_TSV_DIR none $RADIUS $FINGERPRINT_DIR
 ```
 change these paths to absolute paths before running ```run_ddie.py```
