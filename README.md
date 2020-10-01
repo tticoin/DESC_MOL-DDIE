@@ -1,4 +1,4 @@
-## DESC\_MOL-DDIE
+# DESC\_MOL-DDIE
 Implementation of Using Drug Description and Molecular Structures for Drug-Drug Interaction Extraction from Literature
 
 ### Requirements
