@@ -31,7 +31,7 @@ python3 fingerprint/preprocessor.py $NEW_TSV_DIR none $RADIUS $FINGERPRINT_DIR
 ```
 change these paths to absolute paths before running ```run_ddie.py```
 
-### DDI Extraction
+#### DDI Extraction
 ```
 cd main
 python run_ddie.py \
