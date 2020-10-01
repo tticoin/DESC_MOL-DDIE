@@ -2,11 +2,11 @@
 Implementation of Using Drug Description and Molecular Structures for Drug-Drug Interaction Extraction from Literature
 
 ## Requirements
-python3  
 torch >= 1.2  
 transformers == 2.1  
-rdkit  
+rdkit (please install via conda ```conda install -c conda-forge rdkit ```)  
 lxml  
+apex (for argument ```--fp16```, optional)  
 
 ## Usage
 ### Preparation of the corpus sets
