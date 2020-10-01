@@ -1,7 +1,7 @@
-## download DrugBank xml file
-download a drugbank xml file and set a path `export DRUGBANK_XML=(your drugbank file)`
+### Downloading DrugBank xml file
+Download a drugbank xml file and set a path `export DRUGBANK_XML=(your drugbank file)`
 
-## add DrugBank information to the tsv file
+### Adding DrugBank information to the tsv file
 ```
 export DICT_DIR=(output dictionary dir)
 export NEW_TSV_DIR=(updated tsv files dir)
