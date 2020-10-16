@@ -19,7 +19,7 @@ see [database/README.md](database/README.md)
 see [fingerprint/README.md](fingerprint/README.md)
 
 #### Preparation of the SciBERT model
-pre-trained SciBERT model is availabel [here](https://s3-us-west-2.amazonaws.com/ai2-s2-research/scibert/huggingface_pytorch/scibert_scivocab_uncased.tar)
+pre-trained SciBERT model is available [here](https://s3-us-west-2.amazonaws.com/ai2-s2-research/scibert/huggingface_pytorch/scibert_scivocab_uncased.tar)
 
 #### Sample data set
 When you use the [sample data set](sample) created by splitting the official training data set, you can skip the preparation of the corpus and the database.
