@@ -62,7 +62,7 @@ python run_ddie.py \
     --fingerprint_dir $FINGERPRINT_DIR \
     --output_dir $OUTPUT_DIR
 ```
-when you use description and molecular strucuture information, please add ```--use_desc``` and ```--use_mol``` arguments respectively.
+when you use description and molecular structure information, please add ```--use_desc``` and ```--use_mol``` arguments respectively.
 
 
 ### Acknowledgement
