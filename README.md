@@ -37,8 +37,8 @@ cd main
 python run_ddie.py \
     --task_name MRPC \
     --model_type bert \
-    --data_dir $NEW_TSV_DIR
-    --model_name_or_path $SCIBERT_MODEL
+    --data_dir $NEW_TSV_DIR \
+    --model_name_or_path $SCIBERT_MODEL \
     --per_gpu_train_batch_size 32 \
     --num_train_epochs 3. \
     --dropout_prob .1 \
