@@ -10,5 +10,4 @@ for i in $TARGET_DIR/*.xml; do
 done
 
 # Convert Brat to TSV format
-mkdir $TSV_DIR
-python3 brat2tsv.py $BRAT_DIR $TSV_DIR/$TSV_NAME
+python3 brat2tsv.py $BRAT_DIR $TSV_FILE

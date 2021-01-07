@@ -50,7 +50,6 @@ class MolecularGraphNeuralNetwork(nn.Module):
         return pad_matrices
 
     def update(self, matrix, vectors, layer):
-        #hidden_vectors = torch.relu(self.W_fingerprint[layer](vectors))
         hidden_vectors = self.activation(self.W_fingerprint[layer](vectors))
         return hidden_vectors + torch.matmul(matrix, hidden_vectors)
 
@@ -89,7 +88,6 @@ class MolecularGraphNeuralNetwork(nn.Module):
 
         if self.layer_output != 0:
             for l in self.W_output_:
-                #molecular_vectors = torch.relu(l(molecular_vectors))
                 molecular_vectors = self.activation(l(molecular_vectors))
 
         """Mask invalid SMILES vectors"""
@@ -110,7 +108,6 @@ class BertForSequenceClassification(BertPreTrainedModel):
         super(BertForSequenceClassification, self).__init__(config)
         self.num_labels = config.num_labels
 
-        #self.dropout = nn.Dropout(config.hidden_dropout_prob)
         self.dropout = nn.Dropout(args.dropout_prob)
     
         activations = {'relu':nn.ReLU(), 'elu':nn.ELU(), 'leakyrelu':nn.LeakyReLU(), 'prelu':nn.PReLU(),
@@ -119,14 +116,12 @@ class BertForSequenceClassification(BertPreTrainedModel):
 
         if args.use_cnn:
             self.conv_list = nn.ModuleList([nn.Conv1d(config.hidden_size+2*args.pos_emb_dim, config.hidden_size, w, padding=(w-1)//2) for w in args.conv_window_size])
-            #self.conv = nn.Conv1d(config.hidden_size+2*args.pos_emb_dim, config.hidden_size, args.conv_window_size, padding=(args.conv_window_size-1)//2)
             self.pos_emb = nn.Embedding(2*args.max_seq_length, args.pos_emb_dim, padding_idx=0)
 
         if args.use_desc and args.use_mol:
             self.desc_conv = nn.Conv1d(config.hidden_size, args.desc_conv_output_size, args.desc_conv_window_size, padding=(args.desc_conv_window_size-1)//2)
             self.classifier = nn.Linear(config.hidden_size+2*args.desc_conv_output_size+2*gnn_config.dim, config.num_labels)
-            #self.middle_classifier = nn.Linear(config.hidden_size+2*args.desc_conv_output_size+2*gnn_config.dim, args.middle_layer_size)
-            #self.classifier = nn.Linear(args.middle_layer_size, config.num_labels)
+            self.middle_classifier = nn.Linear(config.hidden_size+2*args.desc_conv_output_size+2*gnn_config.dim, args.middle_layer_size)
         elif args.use_desc:
             self.desc_conv = nn.Conv1d(config.hidden_size, args.desc_conv_output_size, args.desc_conv_window_size, padding=(args.desc_conv_window_size-1)//2)
             if args.desc_layer_hidden != 0: self.W_desc = nn.Linear(2*args.desc_conv_output_size, 2*args.desc_conv_output_size)
@@ -136,19 +131,18 @@ class BertForSequenceClassification(BertPreTrainedModel):
                 self.middle_classifier = nn.Linear(config.hidden_size+2*args.desc_conv_output_size, args.middle_layer_size)
                 self.classifier = nn.Linear(args.middle_layer_size, config.num_labels)
         elif args.use_mol:
-            #self.classifier = nn.Linear(config.hidden_size+2*gnn_config.dim, config.num_labels)
             if args.middle_layer_size == 0:
                 self.classifier = nn.Linear(config.hidden_size+2*gnn_config.dim, config.num_labels)
             else:
                 self.middle_classifier = nn.Linear(config.hidden_size+2*gnn_config.dim, args.middle_layer_size)
                 self.classifier = nn.Linear(args.middle_layer_size, config.num_labels)
         else:
-            #self.classifier = nn.Linear(config.hidden_size, config.num_labels)
-            self.classifier = nn.Linear(len(args.conv_window_size)*config.hidden_size, config.num_labels)
-            #self.middle_classifier = nn.Linear(len(args.conv_window_size)*config.hidden_size, args.middle_layer_size)
-            #self.classifier = nn.Linear(args.middle_layer_size, config.num_labels)
+            if args.middle_layer_size == 0:
+                self.classifier = nn.Linear(len(args.conv_window_size)*config.hidden_size, config.num_labels)
+            else:
+                self.middle_classifier = nn.Linear(len(args.conv_window_size)*config.hidden_size, args.middle_layer_size)
+                self.classifier = nn.Linear(args.middle_layer_size, config.num_labels)
 
-        #self.init_weights()
         if args.use_cnn:
             self.pos_emb.weight.data.uniform_(-1e-3, 1e-3)
 
@@ -186,13 +180,6 @@ class BertForSequenceClassification(BertPreTrainedModel):
             pos_embs1 = self.pos_emb(relative_dist1)
             pos_embs2 = self.pos_emb(relative_dist2)
             conv_input = torch.cat((outputs[0], pos_embs1, pos_embs2), 2)
-            #conv_input = self.dropout(conv_input)
-            """
-            #conv_input = self.dropout(conv_input)
-            conv_output = self.activation(self.conv(conv_input.transpose(1,2)))
-            pooled_output, _ = torch.max(conv_output, -1)
-            #pooled_output = self.dropout(pooled_output)
-            """
             conv_outputs = []
             for c in self.conv_list:
                 conv_output = self.activation(c(conv_input.transpose(1,2)))
@@ -226,10 +213,6 @@ class BertForSequenceClassification(BertPreTrainedModel):
             gnn_output1 = self.gnn.gnn(fingerprint1)
             gnn_output2 = self.gnn.gnn(fingerprint2)
             gnn_output = torch.cat((gnn_output1, gnn_output2), 1)
-            #if self.gnn_layer_output != 0:
-            #    gnn_output = self.gnn.mlp(gnn_output1, gnn_output2)
-            #else:
-            #    gnn_output = torch.cat((gnn_output1, gnn_output2), 1)
             pooled_output = torch.cat((pooled_output, gnn_output), 1)
         
         pooled_output = self.dropout(pooled_output)

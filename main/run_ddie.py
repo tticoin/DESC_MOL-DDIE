@@ -571,7 +571,7 @@ def main():
 
     parser.add_argument('--parameter_averaging', action='store_true', help="Whether to use parameter averaging")
     parser.add_argument("--dropout_prob", default=.0, type=float, help="Dropout probability")
-    parser.add_argument('--middle_layer_size', type=int, default=100, help="Dimention of middle layer")
+    parser.add_argument('--middle_layer_size', type=int, default=0, help="Dimention of middle layer")
 
     ## For CNN
     parser.add_argument('--use_cnn', action='store_true', help="Whether to use CNN")

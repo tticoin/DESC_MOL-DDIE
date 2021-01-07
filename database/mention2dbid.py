@@ -62,8 +62,6 @@ for k,v in atc_dict.items():
     if len(v) == 1:
     #if True:
         atc_dict_[k] = v[0]
-print(len(atc_dict))
-print(len(atc_dict_))
 
 entry_dict_wo_synonym = {}
 #for dict_ in (name_dict, brand_dict, product_dict):
@@ -87,5 +85,5 @@ mention_dict = {}
 for m, dbid in zip(mentions, merged_res):
     mention_dict[m] = dbid
 
-#with open(mention_dict_out, 'wb') as f:
-#    pickle.dump(mention_dict, f)
+with open(mention_dict_out, 'wb') as f:
+    pickle.dump(mention_dict, f)
